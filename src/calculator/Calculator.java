@@ -186,7 +186,10 @@ public class Calculator extends Application implements EventHandler<ActionEvent>
 		if (total - Math.floor(total) > 0)
 		{
 			formatter.format("%-20.8f", total);
-			textField.setText(formatter.toString());
+			
+			String s = formatter.toString();
+			
+			textField.setText(trimLine(s));
 		}
 		else
 			{
@@ -352,6 +355,26 @@ public class Calculator extends Application implements EventHandler<ActionEvent>
 		button.setOnAction(this);
 		GridPane.setConstraints(button, 3, 4, 1, 1);
 		
+	}
+	
+	private String trimLine(String s) {
+		
+		if (s.contains("."))
+		{
+			char[] charArray = s.toCharArray();
+			
+			int index = charArray.length - 1;
+			
+			while (charArray[index] == '0' || charArray[index] == '.')
+			{
+				index--;
+			}
+			
+			s = s.substring(0, index + 1);
+			
+			return s ;
+		}
+		else return s;
 	}
 
 
